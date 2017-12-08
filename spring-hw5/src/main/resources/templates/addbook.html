@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title th:text="${addStatus?'Add Book Page': 'Update Book Page'}">Add Book Page</title>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+	<div class="container">
+		<h2 th:text="${addStatus==true?'Add Book':'Update Book' }"></h2>
+		<form th:action="${addStatus==true?'/book/add':'/book/update'}" method="post" th:object="${book}" enctype="multipart/form-data"> 
+			<div class="form-group">
+				<label>Id:</label> <input type="number"
+					class="form-control" th:field="*{id}"/>
+			</div>
+			<div class="form-group">
+				<label>Title: </label> <input type="text"
+					class="form-control" th:field="*{title}"/>
+					<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title</span>
+			</div>
+			
+			<div class="form-group">
+				<label>Publish Date:</label> <input type="text"
+					class="form-control" th:field="*{publishDate}"/>
+			</div>
+			<div class="form-group">
+				<label>Author:</label> <input type="text"
+					class="form-control" th:field="*{author}"/>
+			</div>
+			<div class="form-group">
+				<label>Pages:</label> <input type="text"
+					class="form-control" th:field="*{page}"/>
+					<span th:if="${#fields.hasErrors('page')}" th:errors="*{page}">title</span>
+			</div>
+			<div class="form-group">
+				<label>Cover Image:</label> 
+				<!-- <input type="text"
+					class="form-control" th:field="*{coverImage}"/> -->
+					<tr><td>File to upload:</td><td><input type="file" name="file" accept="image/*"/></td></tr>
+				<!-- <tr><td></td><td><input type="submit" value="Upload" /></td></tr> -->
+			</div>
+			<button type="submit" class="btn btn-default" 
+				th:text="${addStatus==true?'Add Book': 'Update Book'}">Add Book</button>
+		</form>
+	</div>
+</body>
+</html>

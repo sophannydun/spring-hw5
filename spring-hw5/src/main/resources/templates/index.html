@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Book Page</title>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/Style.css"/>
+</head>
+<body>
+	
+	<div class="container">
+		<h2>Book List</h2><hr/>
+		
+		<a class="btn btn-primary" href="/book/add">Add Book</a>
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>title</th>
+					<th>publish Date</th>
+					<th>author</th>
+					<th>page</th>
+					<th>cover Image</th>
+				</tr>
+			</thead>
+			<tbody th:each="book: ${listBook}">
+				<tr>
+					<td th:text="${book.id}">id</td>
+					<td th:text="${book.title}">name</td>
+					<td th:text="${book.author}">author</td>
+					<td th:text="${book.page}">page</td>
+					<td>
+						<img th:src="${book.coverImage}"/>
+					</td>
+					<td>
+						<a th:href="@{/book/{id}(id=${book.id})}">Detail</a>
+						<!-- 
+						<form th:action="@{/book/remove(id=${book.id})}" method="post">
+							<input type="submit" value="Remove"/>
+						</form>
+						 -->
+						<td>
+						<a th:href="@{/user/{id}(id=${user.id})}">Detail</a>
+						
+						<form th:action="@{/book/remove(id=${book.id})}" method="post">
+							<input type="submit" value="Remove"/>
+						</form>
+						
+						<!-- <a th:href="@{/user/remove(id=${user.id})}">Remove</a> -->
+						<a th:href="@{/user/edit(id=${user.id})}">Edit</a>
+					</td>
+						<a th:href="@{/book/edit(id=${book.id})}">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
